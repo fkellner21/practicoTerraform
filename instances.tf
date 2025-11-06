@@ -53,7 +53,7 @@ resource "aws_instance" "web" {
   user_data = <<-EOF
   #!/bin/bash
   yum update -y
-  yum install -v httpd.x86_64
+  yum install -y httpd.x86_64
   systemctl start httpd.service
   systemctl enable httpd.service
 
@@ -64,7 +64,7 @@ resource "aws_instance" "web" {
   privHostName=$(curl -s http://169.254.169.254/latest/meta-data/local-hostname --header "X-aws-ec2-metadata-token: $TOKEN")
   privIPv4=$(curl -s http://169.254.169.254/latest/meta-data/local-ipv4 --header "X-aws-ec2-metadata-token: $TOKEN")
   
-  echo "<font face = "Verdana" size = "5">"                               > /var/www/html/index.html
+  echo '<font face = "Verdana" size = "5">'                               > /var/www/html/index.html
   echo "<center><h1>AWS Linux VM Deployed with Terraform</h1></center>"   >> /var/www/html/index.html
   echo "<center> <b>EC2 Instance Metadata</b> </center>"                  >> /var/www/html/index.html
   echo "<center> <b>Instance ID:</b> $instanceId </center>"               >> /var/www/html/index.html
