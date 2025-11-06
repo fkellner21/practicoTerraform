@@ -4,7 +4,7 @@ resource "aws_security_group" "aws-sg-load-balancer" {
   ingress {
     from_port   = 80
     to_port     = 80
-    protocol    = "udp"
+    protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
     description = "Allow incoming HTTP connections"
   }
@@ -58,7 +58,7 @@ resource "aws_lb_target_group" "alb_target_group" {
 }
 
 resource "aws_lb_listener" "alb_http_listener" {
-  load_balancer_arn = aws_lb.aws-application_load_balancers.id
+  load_balancer_arn = aws_lb.aws-application_load_balancer.arn
   port              = 80
   protocol          = "HTTP"
 
