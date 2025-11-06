@@ -26,7 +26,7 @@ resource "aws_subnet" "public_subnets" {
   cidr_block        = cidrsubnet("10.0.0.0/16", 8, count.index)
   availability_zone = data.aws_availability_zones.available_zones.names[count.index]
 
-  map_public_ip_on_launch = false
+  map_public_ip_on_launch = true
 
   tags = {
     Name = "terraform-pubsubnet-${count.index + 1}"
